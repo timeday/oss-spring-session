@@ -1,0 +1,34 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://x.x.x:3306/zmq
+    username: root
+    password: x
+  session:
+    #tore-type: jdbc
+    tore-type: redis
+    redis:
+      flush-mode: on_save
+      namespace: spring:session
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    timeout: 5000
+
+#Spring Boot将会应用相当于手动添加@EnableJdbcHttpSession注解的配置。
+#创建一个实现了Filter的名为springSessionRepositoryFilter的Bean（过滤器）。这个过滤器负责使用Spring Session支持的实现去替换HttpSession。
+#server.session.timeout= # Session超时时间（秒）
+#spring.session.jdbc.initializer.enabled= #  如果有需要，在启动时可创建必要的Session表。如果默认的表名已经配置或者个性化模式中已经配置，则自动启动。
+#spring.session.jdbc.schema=classpath:org/springframework/session/jdbc/schema-@@platform@@.sql # 初始化数据库schema的SQL脚本目录。
+#spring.session.jdbc.table-name=SPRING_SESSION # 用于存储会话的数据库表名。
+
+
+mybatis:
+  typeAliasesPackage: com.oss.springsesssion.bean
+  config-location: classpath:mybatis/mybatis.xml
+  mapper-locations: classpath:mapper/*.xml
+
+debug: true
+server:
+  port: 8888
+  session: 1800 # Session超时时间（秒）
